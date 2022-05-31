@@ -62,7 +62,9 @@ async function doSearch(searchString) {
   if (myApi.totalPossible === 0) Notify.failure("Sorry, there are no images matching your search query. Please try again.")
     else if (searchString) Notify.success(`Hooray! We found ${myApi.totalPossible} images.`);
 
+  const scrollY = { top: loadMoreBtn.parentNode.offsetTop - searchForm.clientHeight, behavior: "smooth" };
   myApi.buildCardList(data.hits);
+  if (!endlessScrollEnabled) window.scrollTo(scrollY);
 
   ajustLoadMoreBtnVisibility();
   lbGallery.refresh();
